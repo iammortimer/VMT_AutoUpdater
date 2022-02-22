@@ -43,7 +43,7 @@ class AvalancheAPI(object):
         
         Tycoons = []
         if balance > 0:
-            for i in range(1, balance):
+            for i in range(0, balance):
                 TycoonID = self.contractvmt.functions.tokenOfOwnerByIndex(config.SENDER_ADDRESS, i).call()
                 Tycoons.append(TycoonID)
                 

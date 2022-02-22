@@ -98,6 +98,7 @@ while True:
     
     #wait for the cooldown period
     if doWait:
+        nowtime = int(time.time())
         if waituntil > nowtime:
             print ("Processed all tycoons, wait cycle started for " + str(waituntil - nowtime) + " seconds.")
             time.sleep(waituntil - nowtime)
