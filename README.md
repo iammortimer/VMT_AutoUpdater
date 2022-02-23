@@ -3,6 +3,13 @@
 Python script to automate updating your VM Tycoon's.
 
 ## Installation
+If you don't have Python installed yet on your WIndows machine follow these instructions:
+1. Download and install python following the instructions here: https://docs.python.org/3/using/windows.html, make sure to select 'Add Python to PATH' during the installation.
+2. Download and install the Microsoft C++ Build Tools following the instructions here: https://docs.microsoft.com/en-us/answers/questions/136595/error-microsoft-visual-c-140-or-greater-is-require.html
+3. Install pip following the instructions here: https://www.geeksforgeeks.org/how-to-install-pip-on-windows/
+4. Follow the rest of the instructions below.
+
+
 Clone this repository and edit the config.py file to add your wallet info. Install the dependencies via:
 ```
 pip3 install web3

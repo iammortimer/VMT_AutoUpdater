@@ -55,10 +55,10 @@ class AvalancheAPI(object):
         return reqDolla
 
     def getTycoonInfo(self, tid):
-        myTycoon= self.contractbiz.functions.stakedVMTycoon(tid).call()
+        myTycoon = self.contractbiz.functions.stakedVMTycoon(tid).call()
         
         return myTycoon
-        
+       
     def addDolla(self, tid, amount):
         sender = self.web3.toChecksumAddress(config.SENDER_ADDRESS)
         nonce = self.web3.eth.get_transaction_count(sender)
@@ -77,6 +77,39 @@ class AvalancheAPI(object):
         nonce = self.web3.eth.get_transaction_count(sender)
         
         approve = self.contractbiz.functions.levelUpVMTycoon(tid = tid).buildTransaction({
+            'from': sender,
+            'nonce': nonce
+        })
+        signed_txn = self.web3.eth.account.sign_transaction(approve, private_key=config.PRIVATE_KEY)
+        tx_token = self.web3.eth.send_raw_transaction(signed_txn.rawTransaction)
+        tx = self.web3.toHex(tx_token)
+        return tx
+
+# --------------------------------- Claiming --------------------------------- #
+ 
+    def getClaimableDolla(self):
+        myDolla = self.contractdolla.functions.claimableView(config.SENDER_ADDRESS).call()
+        
+        return myDolla
+       
+    def claimBiz(self, tokenIds):
+        sender = self.web3.toChecksumAddress(config.SENDER_ADDRESS)
+        nonce = self.web3.eth.get_transaction_count(sender)
+        
+        approve = self.contractbiz.functions.claimBusinesses(tokenIds = tokenIds).buildTransaction({
+            'from': sender,
+            'nonce': nonce
+        })
+        signed_txn = self.web3.eth.account.sign_transaction(approve, private_key=config.PRIVATE_KEY)
+        tx_token = self.web3.eth.send_raw_transaction(signed_txn.rawTransaction)
+        tx = self.web3.toHex(tx_token)
+        return tx
+       
+    def stakeBiz(self, amount):
+        sender = self.web3.toChecksumAddress(config.SENDER_ADDRESS)
+        nonce = self.web3.eth.get_transaction_count(sender)
+        
+        approve = self.contractdolla.functions.staking(amount = amount).buildTransaction({
             'from': sender,
             'nonce': nonce
         })
