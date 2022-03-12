@@ -1,4 +1,5 @@
 import time
+from traceback import print_list
 import Config as config
 from AVAXAPI import AvalancheAPI
 
@@ -16,6 +17,9 @@ print(f'We have {dolla/(10**decimals)} {symbol}')
 print(f'We have {cdolla/(10**decimals)} claimable {symbol}')
 
 minReqDolla = 0
+
+def get_reqDollaForNxtLvl(token):
+    return int(token.get('reqDollaForNxtLvl'))
 
 while True:
     dolla = avapi.get_token_holdings(config.DOLLA_CONTRACT_ADRESS)
@@ -83,6 +87,8 @@ while True:
             "reqDollaForNxtLvl" : forNxtLvl*(10**decimals)
         }
         myTycoons.append(tycoon)
+
+    myTycoons.sort(key=get_reqDollaForNxtLvl)
 
     for tycoon in myTycoons:
         print("Processing Tycoon #" + str(tycoon['tid']))

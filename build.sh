@@ -4,4 +4,5 @@ DIRNAME=`dirname "$0"`
 
 cd $DIRNAME
 
-docker-compose build --no-cache
+docker-compose build
+# docker-compose build --no-cache
