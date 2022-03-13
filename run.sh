@@ -3,6 +3,4 @@ DIRNAME=`dirname "$0"`
 
 cd $DIRNAME
 
-docker-compose run vmt-autoupdater
-
-# docker-compose run --rm vmt-autoupdater
+docker run -d vmt-autoupdater
