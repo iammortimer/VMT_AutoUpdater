@@ -4,4 +4,4 @@ DIRNAME=`dirname "$0"`
 
 cd $DIRNAME
 
-docker-compose build --no-cache
+docker build -t vmtautoupdater .
